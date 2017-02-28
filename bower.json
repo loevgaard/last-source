@@ -1,0 +1,13 @@
+{
+  "name": "lastsource",
+  "homepage": "https://github.com/loevgaard/last-source",
+  "authors": [
+    "Joachim Loevgaard <joachim@loevgaard.dk>"
+  ],
+  "description": "Saves the last source a visitor came from. Ideal for tracking programs where you only want to pay for the last click",
+  "keywords": [
+    "library",
+    "lastsource"
+  ],
+  "license": "MIT"
+}
