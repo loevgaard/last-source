@@ -1,3 +1,10 @@
+/*!
+ * Last Source
+ * https://github.com/loevgaard/last-source
+ *
+ * Copyright 2017 Joachim Loevgaard
+ * Released under the MIT license
+ */
 ;(function(window, document){
     "use strict";
 
