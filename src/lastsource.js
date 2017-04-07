@@ -10,8 +10,11 @@
 
     var settings = {
         sources: [
-            {queryParameter: 'utm_source', 'value': 'self'},
-            {queryParameter: 'gclid', 'value': 'adwords'}
+            {referrer: 'google', 'value': 'self'},
+            {referrer: 'yahoo', 'value': 'self'},
+            {referrer: 'bing', 'value': 'self'},
+            {queryParameter: 'gclid', 'value': 'adwords'},
+            {queryParameter: 'utm_source', 'value': 'self'}
         ],
         cookie: {
             name: 'last_source',
@@ -19,7 +22,7 @@
         }
     };
 
-    function lastSource(){
+    function lastSource() {
         var obj = {};
 
         /**
@@ -60,10 +63,15 @@
         obj.checkSource = function () {
             var source;
 
-            for(var i = 0; i < settings.sources.length; i++) {
-                source = settings.sources[i];
+            settings.sources.forEach(function (source) {
+                var val = '';
 
-                var val = getQueryParameterByName(source.queryParameter);
+                if(source.hasOwnProperty('queryParameter')) {
+                    val = getQueryParameterByName(source.queryParameter);
+                } else if(source.hasOwnProperty('referrer') && document.referrer && document.referrer.indexOf(source.referrer) >= 0) {
+                    val = document.referrer;
+                }
+
                 if(val) {
                     if(source.value != 'self') {
                         if(typeof(source.value) === 'function') {
@@ -72,9 +80,11 @@
                             val = source.value;
                         }
                     }
+
                     obj.setLastSource(val);
                 }
-            }
+
+            });
 
             return obj;
         };
